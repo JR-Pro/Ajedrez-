@@ -5,7 +5,7 @@ pygame.init()
 
 dimen = [600,600]
 screen = pygame.display.set_mode(dimen)
-pygame.display.set_caption("TABLERO")
+pygame.display.set_caption("Ajedrez")
 
 running = True
 ancho = int(dimen[0] / 8)
