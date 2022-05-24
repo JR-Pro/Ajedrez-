@@ -1,4 +1,5 @@
 import pygame
+
 negro = (0,0,0)
 blanco = (255,255,255)
 pygame.init()
@@ -10,6 +11,7 @@ pygame.display.set_caption("Ajedrez")
 running = True
 ancho = int(dimen[0] / 8)
 alto = int(dimen[1] / 8)
+reloj = pygame.time.Clock()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -26,6 +28,6 @@ while running:
          color += 1
 
     pygame.display.flip()
-
+    reloj.tick(5)
 pygame.quit()
 
