@@ -28,8 +28,8 @@ class ajadrez():
             color += 1
             dibujarTexto(screen, self.letras[i], [x, p_inicio[1] - tamanio_fuente], fuente)
             dibujarTexto(screen,str(i + 1), [p_inicio[0] - tamanio_fuente, x], fuente)
-            
-       
+        
+    
     def dibujarTexto(self,screen, texto, posicion, fuente):
         self.Texto = fuente.render(texto, 1, self.azul)
         screen.blit(self.Texto, posicion)        
