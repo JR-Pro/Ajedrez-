@@ -26,13 +26,13 @@ class ajadrez():
                     pygame.draw.rect(screen, self.selec , [x, y, dimension, dimension], 0)
                 color += 1
             color += 1
-            dibujarTexto(screen, self.letras[i], [x, p_inicio[1] - tamanio_fuente], fuente)
-            dibujarTexto(screen,str(i + 1), [p_inicio[0] - tamanio_fuente, x], fuente)
+            self.Texto(screen, self.letras[i], [x, p_inicio[1] - tamanio_fuente], fuente)
+            self.Texto(screen,str(i + 1), [p_inicio[0] - tamanio_fuente, x], fuente)
         
     
-    def dibujarTexto(self,screen, texto, posicion, fuente):
-        self.Texto = fuente.render(texto, 1, self.azul)
-        screen.blit(self.Texto, posicion)        
+    def Texto(self,screen, tex, posicion, fuente):
+        self.Tex = fuente.render(tex, 1, self.azul)
+        screen.blit(self.Tex, posicion)        
         
     def ajustarMedidas(self,tamanio_fuente):
         if self.dimen[1] < self.dimen[0]:
@@ -62,7 +62,7 @@ class ajadrez():
         tamanio_fuente = 30
         seleccion = ['Z', -1]
         fuente = pygame.font.Font("fuentes/AliceandtheWickedMonster.ttf", tamanio_fuente)
-        puntoInicio, dimension = ajustarMedidas(tamanio_fuente)
+        puntoInicio, dimension = self.ajustarMedidas(tamanio_fuente)
         while game_over is False:
             for evento in pygame.event.get():
                 if evento.type == pygame.QUIT:
@@ -70,16 +70,12 @@ class ajadrez():
             botones = pygame.mouse.get_pressed()
             if botones[0]:
                 pos = pygame.mouse.get_pos()
-                seleccion = obtenerPosicion(pos, dimension, puntoInicio, seleccion)
+                seleccion = self.obtenerPosicion(pos, dimension, puntoInicio, seleccion)
             screen.fill(self.fondo)
-            dibujarTablero(screen, dimension, puntoInicio, tamanio_fuente, fuente, seleccion)
+            self.dibujarTablero(screen, dimension, puntoInicio, tamanio_fuente, fuente, seleccion)
             pygame.display.flip()
             clock.tick(60)
-        pygame.quit()
+        pygame.quit()    
 
 
-if __name__ == "__main__":
-    ajadrez.main()
-
-
-
+ajadrez.main(ajadrez)
