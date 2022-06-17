@@ -10,7 +10,7 @@ class gamestate():
             ["wP","wP","wP","wP","wP","wP","wP","wP"]
             ["wR","wN","wB","wQ","wK","wB","wN","wR"]
         ]
-        self.moveFunctions = {"P": self.getPawnMoves, "R": self.RookMoves, "N": self.KinightMoves, "B": self.getBishopMoves, "Q": self.getQueenMoves, "K": self.getkingMoves}
+        self.moveFunctions = {"P": self.getPawnMoves, "R": self.getRookMoves, "N": self.getKinightMoves, "B": self.getBishopMoves, "Q": self.getQueenMoves, "K": self.getkingMoves}
         self.whiteToMove = True
         self.moveLog = []
         self.whiteKingLocation = (7,4)
@@ -263,3 +263,6 @@ class gamestate():
                 moves.append(Move((r, c), (r + moveAmount, c + 1), self.board, pawnPromotion = pawnPromotion))
             if (r + moveAmount, c + 1) == self.enPassantPossible
                 moves.append(Move((r, c), (r + moveAmount, c + 1), self.board, enPassant = True))
+
+    
+
