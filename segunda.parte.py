@@ -1,3 +1,6 @@
+
+import pygame as p
+from pygame import Move, CastleRights
 class gamestate():
     def __init__(self):
         self.board = [
@@ -26,7 +29,7 @@ class gamestate():
         self.wCastleQueenside = True
         self.bCastleKingside = True
         self.bCastleQueenside = True
-        selfl.castleRightslog = [CastleRights(self.wCastleKingside, self.bCastleKingside, self.wCastleQueenside, self.bCastleQueenside)]
+        self.castleRightslog = [CastleRights(self.wCastleKingside, self.bCastleKingside, self.wCastleQueenside, self.bCastleQueenside)]
 
     def makeMOve(self,move):
         self.board[move.startRow][move.startCol] = "--"
@@ -184,7 +187,7 @@ class gamestate():
                             break
                     elif endPiece == enemycolor:
                         type = endPiece[1]
-                        if (0 <= j < 3 and type == "R") or \ (4 <= j <= 7 and type == "B") or \ (i == 1 and type == "P" and((enemycolor == "w" and 6 <= j <= 7) or (enemycolor == "b" and 4 <= j <= 5))) or \ (type == "Q") or (i == 1 and type == "K"):
+                        if (0 <= j < 3 and type == "R") or  (4 <= j <= 7 and type == "B") or  (i == 1 and type == "P" and((enemycolor == "w" and 6 <= j <= 7) or (enemycolor == "b" and 4 <= j <= 5))) or  (type == "Q") or (i == 1 and type == "K"):
                             if possiblePin == ():
                                 inCheck = True 
                                 checks.append((endRow, endCol, d[0], d[1]))
@@ -211,9 +214,9 @@ class gamestate():
     def getAllPosiblesMoves(self):
         moves = []
         for r in range(len(self.board)):
-            for c in range(len(self.board[r]))
+            for c in range(len(self.board[r])):
                 turn = self.board[r][c][0]
-                if (turn == "w" and self.whiteToMove) or (turn == "b" and self.whiteToMove)
+                if (turn == "w" and self.whiteToMove) or (turn == "b" and self.whiteToMove):
                     piece = self.board[r][c][1]
                     self.moveFunctions[piece](r, c, moves)
         return moves
@@ -253,7 +256,7 @@ class gamestate():
                 if r + moveAmount == backRow:
                     pawnPromotion = True 
                 moves.append(Move((r, c), (r + moveAmount, c - 1), self.board, pawnPromotion = pawnPromotion))
-            if (r + moveAmount, c - 1) == self.enPassantPossible
+            if (r + moveAmount, c - 1) == self.enPassantPossible:
                 moves.append(Move((r, c), (r + moveAmount, c - 1), self.board, enPassant = True))
 
         if c - 1 <= 7:
@@ -261,7 +264,7 @@ class gamestate():
                 if r + moveAmount == backRow:
                     pawnPromotion = True 
                 moves.append(Move((r, c), (r + moveAmount, c + 1), self.board, pawnPromotion = pawnPromotion))
-            if (r + moveAmount, c + 1) == self.enPassantPossible
+            if (r + moveAmount, c + 1) == self.enPassantPossible:
                 moves.append(Move((r, c), (r + moveAmount, c + 1), self.board, enPassant = True))
 
     
