@@ -100,7 +100,7 @@ class gamestate():
                 if move.endCol - move.startCol == 2:
                     self.board[move.endRow][move.endCol + 1] = self.board[move.endRow][move.endCol + 1]   
                     self.board[move.endRow][move.endCol - 1] = "--"
-                 else:
+                else:
                     self.board[move.endRow][move.endCol - 2] = self.board[move.endRow][move.endCol - 2]   
                     self.board[move.endRow][move.endCol + 1] = "--"
                  
@@ -124,7 +124,7 @@ class gamestate():
                 check = self.checks[0]
                 checkRow = check[0]
                 checkCol = check[1]
-                piecechecking = sel.board[checkRow][checkCol]
+                piecechecking = self.board[checkRow][checkCol]
                 validSquares = []
 
                 if piecechecking[1] == "N":
