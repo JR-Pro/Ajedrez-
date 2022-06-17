@@ -184,4 +184,69 @@ class gamestate():
                             break
                     elif endPiece == enemycolor:
                         type = endPiece[1]
-                        if (0 <= j < 3 and type == "R") or \ (4 <= j <= 7 and type == "B") 
+                        if (0 <= j < 3 and type == "R") or \ (4 <= j <= 7 and type == "B") or \ (i == 1 and type == "P" and((enemycolor == "w" and 6 <= j <= 7) or (enemycolor == "b" and 4 <= j <= 5))) or \ (type == "Q") or (i == 1 and type == "K"):
+                            if possiblePin == ():
+                                inCheck = True 
+                                checks.append((endRow, endCol, d[0], d[1]))
+                                break
+                            else:
+                                pins.append(possiblePin)
+                                break
+                        else:
+                            break
+                else:
+                    break
+
+        KinightMoves = ((-2, -1),(-2, 1),(-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2,1)) 
+        for m in KinightMoves:
+            endRow = startRow + m[0] 
+            endCol = startCol + m[1] 
+            if 0 <= endRow < 8 and 0 <= endCol < 8:
+                endPiece = self.board[endRow][endCol]
+                if endPiece[0] == enemycolor and endPiece[1] == "N":
+                    inCheck = True 
+                    checks.append((endRow, endCol, m[0], m[1]))
+        return inCheck, pins, checks
+    
+    def getAllPosiblesMoves(self):
+        moves = []
+        for r in range(len(self.board)):
+            for c in range(len(self.board[r]))
+                turn = self.board[r][c][0]
+                if (turn == "w" and self.whiteToMove) or (turn == "b" and self.whiteToMove)
+                    piece = self.board[r][c][1]
+                    self.moveFunctions[piece](r, c, moves)
+        return moves
+    
+    def getPawnMoves(self):
+        piecePinned = False 
+        pinDirection = ()
+        for i in range(len(self.pins)-1, -1, -1):
+            if self.pins[i][0] == r and self.pins[i][0] == c:
+                piecePinned = True 
+                pinDirection = (self.pins[i][2], self.pins[i][3])  
+                self.pins.remove(self.pins[i])  
+                break
+
+        if self.whiteToMove:
+            moveAmount = -1
+            startRow = 6
+            backRow = 0
+            enemycolor = "b"
+        else:
+            moveAmount = 1
+            startRow = 1
+            backRow = 7
+            enemycolor = "w"
+        pawnPromotion = False
+
+        if self.board[r + moveAmount][c] == "--":
+            if not piecePinned or pinDirection == (moveAmount, 0):
+                if r + moveAmount == backRow:
+                    pawnPromotion = True 
+                moves.append(Move((r, c), (r + moveAmount, c), self.board, pawnPromotion = pawnPromotion))
+                if r == startRow and self.board[r + 2 * moveAmount][c] == "--":
+                    moves.append(Move((r, c), (r + 2 * moveAmount, c), self.board))
+
+        if c - 1 >= 0:
+             
