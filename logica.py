@@ -1,11 +1,11 @@
 import colorsys
-from email.mime import image, images
+from email.mime import image
 from shutil import move
 from sqlite3 import SQLITE_SELECT, Row
 from turtle import Screen, color, width
 import pygame as p 
 from pygame import MOUSEBUTTONDOWN, draw
-import game, intArt , time, movimiento 
+import game, intArt , time, Move
 ancho=altura=512
 dimension= 8 # esta es la dimension del tablero 
 tamaño_cuadrado=51 // dimension # estos son las dimensiones de las casillas 
@@ -46,10 +46,10 @@ def main():
                         sqselect()
                         playerClick = []
                 else:
-                    sqselect =(col,Row)
+                    sqselect = (col,Row)
                     playerClick.append(sqselect)
                 if len(playerClick)==2: # despues de dos cliks
-                    move = movimiento.Move(playerClick[0],playerClick[1], gs.board)
+                    move = Move(playerClick[0],playerClick[1], gs.board)
                     print(move.getChessNotation())
                     for i in range(len(ValidarMovimientos)):
                         if move == ValidarMovimientos[i]: # para verificar la validez de un movimiento
@@ -142,8 +142,8 @@ def main():
         textObj= font.render(text,0, p.Color("gray"))
         Screen.blit(textObj,textUbicacion.move(2,2))
 
-    if  __name__ == "__main__":
-        print("si tienes dudas mra dentro de los archivos")
-        print("numbasan")
-        main()
+if  __name__ == "__main__":
+    print("si tienes dudas mra dentro de los archivos")
+    print("numbasan")
+    main()
              
