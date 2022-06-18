@@ -5,8 +5,7 @@ from sqlite3 import SQLITE_SELECT, Row
 from turtle import Screen, color, width
 import pygame as p 
 from pygame import MOUSEBUTTONDOWN, draw
-from pyparsing import col
-import engine, IntArt , time 
+import game, intArt , time, movimiento 
 ancho=altura=512
 dimension= 8 # esta es la dimension del tablero 
 tamaño_cuadrado=51 // dimension # estos son las dimensiones de las casillas 
@@ -23,7 +22,7 @@ def main():
     pantalla=p.display.set_mode((ancho,altura))
     reloj=p.time.Clock()
     pantalla.fill(p.colr("white"))
-    gs = engine.gamestate()
+    gs = game.gamestate()
     ValidarMovimientos = gs.getvalidarMOvimientos()
     MovimientoEcho = False # esta funcion servira para cuando un movimiento sea echo
     cargando_image()
@@ -50,7 +49,7 @@ def main():
                     sqselect =(col,Row)
                     playerClick.append(sqselect)
                 if len(playerClick)==2: # despues de dos cliks
-                    move = engine.Move(playerClick[0],playerClick[1], gs.board)
+                    move = movimiento.Move(playerClick[0],playerClick[1], gs.board)
                     print(move.getChessNotation())
                     for i in range(len(ValidarMovimientos)):
                         if move == ValidarMovimientos[i]: # para verificar la validez de un movimiento
@@ -66,7 +65,7 @@ def main():
                     MovimientoEcho = True 
                     GameOver = False
                 if e.key == p.K_r: # esto sirve para reiniciar el tablero
-                    gs = engine.gamestate()
+                    gs = game.gamestate()
                     ValidarMovimientos= gs.validarMovimientos()
                     sqselect = ()
                     playerClick = []
@@ -75,9 +74,9 @@ def main():
                     #movimiento de la i.a 
                 if not GameOver and not GiroHumano:
                     time.sleep(2) 
-                    apuntar=IntArt.encontrarMejorMovimiento(gs.validarMovimiento)
+                    apuntar=intArt.encontrarMejorMovimiento(gs.validarMovimiento)
                     if apuntar is None:
-                        apuntar = IntArt.buscarMovimiento(ValidarMovimientos)
+                        apuntar = intArt.buscarMovimiento(ValidarMovimientos)
                         gs.hacerMOvimiento(apuntar)
                         MovimientoEcho = True
                     if MovimientoEcho:
@@ -100,7 +99,7 @@ def main():
     def resaltarCuadros(Screen,gs,ValidarMovimientos,sqselect):
      if sqselect !=():
         r,c = sqselect
-        if gs.board[r][c][0]==("w" gs.whiteToMove else "B"): #pieza seleccionada
+        if gs.board[r][c][0]==("w" if gs.whiteToMove else "B"): #pieza seleccionada
             #resalte de las casillas elegidas 
             s = p.superficie((tamaño_cuadrado,tamaño_cuadrado))
             s.seth_alpha(100)
