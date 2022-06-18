@@ -46,10 +46,10 @@ def findBestMove(gs, validMoves):
         gs.undoMove()
     return bestPlayerMove
 
-def findbestMoveMinMax(gs):
+def findBestMoveMinMax(gs):
     global nextmove
     nextMove = None
-    findbestMoveMinMax(gs, game.validMoves, DEPTH, gs.whiteToMove)
+    findBestMoveMinMax(gs, game.validMoves, DEPTH, gs.whiteToMove)
     return nextMove
     
 """

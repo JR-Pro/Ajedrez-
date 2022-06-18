@@ -5,7 +5,8 @@ from sqlite3 import SQLITE_SELECT, Row
 from turtle import Screen, color, width
 import pygame as p 
 from pygame import MOUSEBUTTONDOWN, draw
-import game, intArt , time, Move
+import game, intArt, time, movimiento
+
 ancho=altura=512
 dimension= 8 # esta es la dimension del tablero 
 tamaño_cuadrado=51 // dimension # estos son las dimensiones de las casillas 
@@ -16,14 +17,15 @@ images = {}
 def cargando_image():
     piezas= ["bP","bR","bN","bB","bQ","bK","wP","wR","wN","wB","wQ","wK"]
     for piezas in piezas:
-        images[piezas]= p.transform.scale(p.image.cargando("images/" + piezas +".png" )(tamaño_cuadrado,tamaño_cuadrado))
+        images[piezas]= p.transform.scale(p.image.load("Ajedrez\n" + piezas +"peon-negro.png" )(tamaño_cuadrado,tamaño_cuadrado))
 def main():
     p.init()
     pantalla=p.display.set_mode((ancho,altura))
     reloj=p.time.Clock()
-    pantalla.fill(p.colr("white"))
-    gs = game.gamestate()
-    ValidarMovimientos = gs.getvalidarMOvimientos()
+    White = (255, 255, 255)
+    pantalla.fill(White)
+    gs = game.gamestate
+    ValidarMovimientos = gs.getvalidMoves
     MovimientoEcho = False # esta funcion servira para cuando un movimiento sea echo
     cargando_image()
     run=True 
@@ -49,7 +51,7 @@ def main():
                     sqselect = (col,Row)
                     playerClick.append(sqselect)
                 if len(playerClick)==2: # despues de dos cliks
-                    move = Move(playerClick[0],playerClick[1], gs.board)
+                    move = movimiento.Move(playerClick[0],playerClick[1], gs.board)
                     print(move.getChessNotation())
                     for i in range(len(ValidarMovimientos)):
                         if move == ValidarMovimientos[i]: # para verificar la validez de un movimiento
