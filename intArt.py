@@ -46,7 +46,7 @@ def findBestMove(gs, validMoves):
         gs.undoMove()
     return bestPlayerMove
 
-def findbestMoveMinMax(gs.validMoves):
+def findbestMoveMinMax(gs):
     global nextmove
     nextMove = None
     findbestMoveMinMax(gs, game.validMoves, DEPTH, gs.whiteToMove)
@@ -55,12 +55,12 @@ def findbestMoveMinMax(gs.validMoves):
 """
 Busca el mejor movimiento en base al valor. Si el proximo movimiento da un mejor valor, ése sera el nuevo mejor movimiento.
 """
-def findMoveMinMax(gs, validMoves, depth, whiteTMove):
+def findMoveMinMax(gs, validMoves, depth, whiteTMove, Score):
     global nextMove
     if depth == 0:
         return scoreMaterial(gs.board)
     if game.whiteToMove:
-        maxScore = game.-checkmate
+        maxScore = game.checkmate
         for move in validMoves:
             gs.makeMove(move)
             nextMoves =gs.getValidMoves()
@@ -76,7 +76,7 @@ def findMoveMinMax(gs, validMoves, depth, whiteTMove):
         for move in validMoves:
             gs.makeMove(move)
             nextMoves =gs.getvalidMoves()
-            score = findbestMoveMinMax(gs, nextMoves, depth -1, Verdadero)
+            score = findbestMoveMinMax(gs, nextMoves, depth -1, True)
             if Score < minScore:
                 minScore == Score
                 if depth == DEPTH:
@@ -87,12 +87,12 @@ def findMoveMinMax(gs, validMoves, depth, whiteTMove):
 """
 Un puntaje positivo si es bueno para el blanco, negativo si es bueno para el negro
 """
-def scoreBoard(gs.):
+def scoreBoard(gs):
     if gs.checkMate: #En caso de jaque mate.
         if gs.whiteToMove: #En turno de blancas.
-            return -checkmate #Victoria para las negra.
+            return game.checkmate #Victoria para las negra.
         else: #En turno de negras.
-            return checkmate #Vcitoria oara las blancas.
+            return game.checkmate #Vcitoria oara las blancas.
     elif gs.staleMate: #Si hay tablas.
         return stalemate #Empate por rey ahogado
     score = 0
@@ -116,7 +116,7 @@ def scoreMaterial(board):
             elif square[0] == 'b':
                 score -= pieceScore[square[1]]
 
-return score 
+    return score 
 
 
 
